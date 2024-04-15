@@ -1,0 +1,41 @@
+import React from 'react';
+
+// Define a generic List component that accepts items of type T
+type ListProps<T> = {
+  items: T[];
+  renderItem: (item: T) => React.ReactNode;
+};
+
+function List<T>({ items, renderItem }: ListProps<T>) {
+  return (
+    <ul>
+      {items.map((item, index) => (
+        <li key={index}>{renderItem(item)}</li>
+      ))}
+    </ul>
+  );
+}
+
+// Usage example:
+// Define a type for the items
+type Item = {
+  id: number;
+  name: string;
+};
+
+// Sample data
+const items: Item[] = [
+  { id: 1, name: 'Item 1' },
+  { id: 2, name: 'Item 2' },
+  // ... more items
+];
+
+// Render the List component with Item type and data
+export default function App() {
+  return (
+    <List
+      items={items}
+      renderItem={(item) => <span>{item.name}</span>}
+    />
+  );
+}
